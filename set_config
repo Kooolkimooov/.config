@@ -16,7 +16,7 @@ echo ""
 echo "Copying from repo to $DEST"
 for item in "$SOURCE"/*; do
   basename_item=$(basename "$item")
-  if [ -d "$item" ] && [ "$basename_item" != "get_config" ] && [ "$basename_item" != "set_config" ] && [ "$basename_item" != ".git" ]; then
+  if [ -d "$item" ] && [ "$basename_item" != "get_config" ] && [ "$basename_item" != "set_config" ] && [ "$basename_item" != "diff_config" ] && [ "$basename_item" != ".git" ]; then
     echo -e "  \033[32m→ $basename_item\033[0m"
     cp -rv "$item" "$DEST" | sed 's/^/    /'
   fi
