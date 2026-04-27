@@ -1,0 +1,87 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "height": 20,
+  "spacing": 6,
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "mpris",
+    "pulseaudio",
+    "custom/cpu_temp",
+    "custom/cpu_fan",
+    "custom/gpu_temp",
+    "custom/gpu_fan",
+    "custom/hotspot_status",
+    "clock"
+  ],
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "format": "{name}"
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 60
+  },
+  "mpris": {
+    "format": "{status_icon} {dynamic}",
+    "format-paused": "{status_icon} {dynamic}",
+    "format-stopped": "",
+    "dynamic-len": 40,
+    "interval": 1,
+    "tooltip": false,
+    "player-icons": {
+      "default": "M"
+    },
+    "status-icons": {
+      "playing": "",
+      "paused": "",
+      "stopped": ""
+    }
+  },
+  "pulseaudio": {
+    "format": "  {volume}%",
+    "format-muted": " muted",
+    "scroll-step": 2,
+    "on-click": "kitty wiremix",
+    "on-click-right": "kitty wiremix",
+    "tooltip": false
+  },
+  "custom/cpu_temp": {
+    "format": "{}",
+    "exec": "/home/martin/.config/waybar/scripts/cpu_temp.sh",
+    "interval": 2,
+    "tooltip": false
+  },
+  "custom/gpu_temp": {
+    "format": "{}",
+    "exec": "/home/martin/.config/waybar/scripts/gpu_temp.sh",
+    "interval": 5,
+    "tooltip": false
+  },
+  "custom/cpu_fan": {
+    "format": "{}",
+    "exec": "/home/martin/.config/waybar/scripts/cpu_fan.sh",
+    "interval": 2,
+    "tooltip": false
+  },
+  "custom/gpu_fan": {
+    "format": "{}",
+    "exec": "/home/martin/.config/waybar/scripts/gpu_fan.sh",
+    "interval": 2,
+    "tooltip": false
+  },
+  "custom/hotspot_status": {
+    "format": "{}",
+    "exec": "/home/martin/.config/waybar/scripts/hotspot_status.sh",
+    "interval": 2,
+    "on-click": "nm-connection-editor",
+    "tooltip": false
+  },
+  "clock": {
+    "format": "{:%H:%M:%S  %d-%m-%Y}",
+    "interval": 1
+  }
+}
