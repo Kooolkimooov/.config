@@ -1,0 +1,12 @@
+#!/bin/bash
+REPO="$(dirname "$0")"
+SOURCE="$HOME/.config"
+
+echo "Comparing $REPO with $SOURCE"
+
+for item in "$REPO"/*; do
+  basename_item=$(basename "$item")
+  if [ "$basename_item" != ".git" ] && [ "$basename_item" != "get_config" ] && [ "$basename_item" != "set_config" ] && [ "$basename_item" != "diff_config" ]; then
+    diff -U5 -r "$item" "$SOURCE/$basename_item" 2>/dev/null | sed -e "s/^-/$(printf '\033')[32m-/; s/^+/$(printf '\033')[34m+/; s/$/$(printf '\033')[0m/"
+  fi
+done
