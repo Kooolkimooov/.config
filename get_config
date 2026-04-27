@@ -1,0 +1,14 @@
+#!/bin/bash
+DEST="$(dirname "$0")"
+echo "Copying from ~/.config to $DEST"
+for item in ~/.config/*; do
+  basename_item=$(basename "$item")
+  if [ -d "$DEST/$basename_item" ]; then
+    echo -e "  \033[32m→ $basename_item\033[0m"
+    cp -r "$item" "$DEST"
+    find "$DEST/$basename_item" -type d -name '.git' -exec rm -rf {} + 2>/dev/null
+  else
+    echo -e "  \033[31m⊘ $basename_item (skipped)\033[0m"
+  fi
+done
+echo "Done"
