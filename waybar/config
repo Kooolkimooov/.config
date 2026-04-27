@@ -51,31 +51,31 @@
   },
   "custom/cpu_temp": {
     "format": "{}",
-    "exec": "/home/martin/.config/waybar/scripts/cpu_temp.sh",
+    "exec": "$HOME/.config/waybar/scripts/cpu_temp.sh",
     "interval": 2,
     "tooltip": false
   },
   "custom/gpu_temp": {
     "format": "{}",
-    "exec": "/home/martin/.config/waybar/scripts/gpu_temp.sh",
+    "exec": "$HOME/.config/waybar/scripts/gpu_temp.sh",
     "interval": 5,
     "tooltip": false
   },
   "custom/cpu_fan": {
     "format": "{}",
-    "exec": "/home/martin/.config/waybar/scripts/cpu_fan.sh",
+    "exec": "$HOME/.config/waybar/scripts/cpu_fan.sh",
     "interval": 2,
     "tooltip": false
   },
   "custom/gpu_fan": {
     "format": "{}",
-    "exec": "/home/martin/.config/waybar/scripts/gpu_fan.sh",
+    "exec": "$HOME/.config/waybar/scripts/gpu_fan.sh",
     "interval": 2,
     "tooltip": false
   },
   "custom/hotspot_status": {
     "format": "{}",
-    "exec": "/home/martin/.config/waybar/scripts/hotspot_status.sh",
+    "exec": "$HOME/.config/waybar/scripts/hotspot_status.sh",
     "interval": 2,
     "on-click": "nm-connection-editor",
     "tooltip": false
