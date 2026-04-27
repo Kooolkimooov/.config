@@ -1,0 +1,24 @@
+#!/bin/bash
+SOURCE="$(dirname "$0")"
+DEST="$HOME/.config"
+
+# Find next backup number
+BACKUP_NUM=0
+while [ -d "$DEST.bak.$BACKUP_NUM" ]; do
+  ((BACKUP_NUM++))
+done
+BACKUP_DIR="$DEST.bak.$BACKUP_NUM"
+
+echo "Backing up $DEST to $BACKUP_DIR"
+cp -r "$DEST" "$BACKUP_DIR"
+echo "✓ Backup complete"
+echo ""
+echo "Copying from repo to $DEST"
+for item in "$SOURCE"/*; do
+  basename_item=$(basename "$item")
+  if [ -d "$item" ] && [ "$basename_item" != "get_config" ] && [ "$basename_item" != "set_config" ] && [ "$basename_item" != ".git" ]; then
+    echo -e "  \033[32m→ $basename_item\033[0m"
+    cp -rv "$item" "$DEST" | sed 's/^/    /'
+  fi
+done
+echo "Done"
