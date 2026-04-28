@@ -73,7 +73,6 @@
     },
     "scroll-step": 2,
     "on-click": "pidof wiremix >/dev/null || hyprctl dispatch exec \"[float; size (monitor_w*0.9) (monitor_h*0.9); center] kitty -e wiremix\"",
-    "on-click-right": "kitty wiremix",
     "tooltip": false
   },
   "network#wifi": {
@@ -96,37 +95,6 @@
     "format": " {status}",
     "format-connected": " {device_alias}",
     "on-click": "pidof bluetui >/dev/null || hyprctl dispatch exec \"[float; size (monitor_w*0.9) (monitor_h*0.9); center] kitty -e bluetui\""
-  },
-  "custom/cpu_temp": {
-    "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/cpu_temp.sh",
-    "interval": 2,
-    "tooltip": false
-  },
-  "custom/gpu_temp": {
-    "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/gpu_temp.sh",
-    "interval": 5,
-    "tooltip": false
-  },
-  "custom/cpu_fan": {
-    "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/cpu_fan.sh",
-    "interval": 2,
-    "tooltip": false
-  },
-  "custom/gpu_fan": {
-    "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/gpu_fan.sh",
-    "interval": 2,
-    "tooltip": false
-  },
-  "custom/hotspot_status": {
-    "format": "{}",
-    "exec": "$HOME/.config/waybar/scripts/hotspot_status.sh",
-    "interval": 2,
-    "on-click": "nm-connection-editor",
-    "tooltip": false
   },
   "clock": {
     "format": "{:%H:%M:%S  %d-%m-%Y}",
