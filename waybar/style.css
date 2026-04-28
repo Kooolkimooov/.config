@@ -21,6 +21,11 @@ window#waybar {
 #custom-gpu_temp,
 #custom-gpu_fan,
 #custom-hotspot_status,
+#network,
+#network-wifi,
+#network-ethernet,
+#battery,
+#bluetooth,
 #clock {
   color: #ffffff;
   background: #000000;
