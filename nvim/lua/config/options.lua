@@ -14,3 +14,8 @@ vim.o.termguicolors = true
 vim.cmd([[highlight Normal ctermbg=NONE guibg=NONE]])
 vim.cmd([[highlight NormalNC ctermbg=NONE guibg=NONE]])
 vim.cmd([[highlight NonText ctermbg=NONE guibg=NONE]])
+
+local zsh = vim.fn.exepath("zsh")
+if zsh ~= "" then
+  vim.opt.shell = zsh
+end
