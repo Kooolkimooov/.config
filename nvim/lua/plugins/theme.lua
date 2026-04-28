@@ -1,12 +1,26 @@
 return { -- Using lazy.nvim
-  "metalelf0/black-metal-theme-neovim",
+  "catppuccin/nvim",
+  name = "catppuccin",
   lazy = false,
   priority = 1000,
   config = function()
-    require("black-metal").setup({
-      -- optional configuration here
+    require("catppuccin").setup({
+      flavour = "latte",
+      transparent_background = true,
+      custom_highlights = function()
+        return {
+          Normal = { fg = "#000000", bg = "NONE" },
+          NormalNC = { fg = "#000000", bg = "NONE" },
+          NormalFloat = { fg = "#000000", bg = "NONE" },
+          SignColumn = { bg = "NONE" },
+          EndOfBuffer = { bg = "NONE" },
+        }
+      end,
+      integrations = {
+        bufferline = true,
+      },
     })
-    require("black-metal").load()
+    vim.cmd.colorscheme("catppuccin")
   end,
   specs = {
     {

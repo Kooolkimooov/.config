@@ -8,8 +8,8 @@
 }
 
 window#waybar {
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: #000000;
 }
 
 #workspaces,
@@ -27,24 +27,24 @@ window#waybar {
 #battery,
 #bluetooth,
 #clock {
-  color: #ffffff;
-  background: #000000;
+  color: #000000;
+  background: #ffffff;
   padding: 0 8px;
 }
 
 #workspaces button {
-  color: #ffffff;
-  background: #000000;
+  color: #000000;
+  background: #ffffff;
   padding: 0 6px;
 }
 
 #workspaces button.active,
 #workspaces button.focused {
-  color: #000000;
-  background: #ffffff;
+  color: #ffffff;
+  background: #1a1a1a;
 }
 
 #workspaces button.urgent {
   color: #ffffff;
-  background: #000000;
+  background: #c0392b;
 }
