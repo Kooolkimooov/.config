@@ -125,7 +125,7 @@
     "format": "{}",
     "exec": "$HOME/.config/waybar/scripts/hotspot_status.sh",
     "interval": 2,
-    "on-click": "nm-connection-editor",
+    "on-click": "pidof nmtui >/dev/null || hyprctl dispatch exec \"[float; size (monitor_w*0.9) (monitor_h*0.9); center] kitty -e nmtui\"",
     "tooltip": false
   },
   "clock": {
