@@ -7,15 +7,6 @@ return { -- Using lazy.nvim
     require("catppuccin").setup({
       flavour = "latte",
       transparent_background = true,
-      custom_highlights = function()
-        return {
-          Normal = { fg = "#000000", bg = "NONE" },
-          NormalNC = { fg = "#000000", bg = "NONE" },
-          NormalFloat = { fg = "#000000", bg = "NONE" },
-          SignColumn = { bg = "NONE" },
-          EndOfBuffer = { bg = "NONE" },
-        }
-      end,
       integrations = {
         bufferline = true,
       },
