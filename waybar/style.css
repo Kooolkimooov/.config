@@ -54,3 +54,13 @@ window#waybar {
   background: #ff0000;
   padding: 0 8px;
 }
+
+#custom-capslock {
+  padding: 0;
+}
+
+#custom-capslock.locked {
+  color: #ffffff;
+  background: #ff0000;
+  padding: 0 8px;
+}

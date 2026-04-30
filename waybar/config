@@ -21,6 +21,7 @@
     "custom/hotspot_status",
     "battery",
     "clock",
+    "custom/capslock",
     "custom/power"
   ],
   "hyprland/workspaces": {
@@ -133,6 +134,13 @@
     "interval": 1,
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format-alt": "{:%Y-%m-%d}"
+  },
+  "custom/capslock": {
+    "exec": "~/.config/waybar/scripts/capslock.sh",
+    "return-type": "json",
+    "interval": 1,
+    "format": "{}",
+    "tooltip": false
   },
   "battery": {
     "states": {
