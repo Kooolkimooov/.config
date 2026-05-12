@@ -1,6 +1,17 @@
 #!/bin/bash
 DEST="$(dirname "$0")"
-echo "Copying from ~/.config to $DEST"
+ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+
+echo "Copying from ~/.config to $DEST and $ZSH_CUSTOM_DIR"
+
+# Sync all .zsh files from custom dir to repo
+for zsh_file in "$ZSH_CUSTOM_DIR"/*.zsh; do
+  [ -e "$zsh_file" ] || continue
+  basename_zsh=$(basename "$zsh_file")
+  echo -e "  \033[32m→ $basename_zsh\033[0m"
+  cp "$zsh_file" "$DEST/$basename_zsh"
+done
+
 for item in ~/.config/*; do
   basename_item=$(basename "$item")
   if [ -d "$DEST/$basename_item" ]; then
