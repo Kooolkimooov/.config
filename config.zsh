@@ -30,6 +30,8 @@ ZSH_THEME="bira"
     aliases
   )
 
+  TIMER_FORMAT="%d"
+
   # Only source OMZ if it hasn't been sourced yet
   if [[ -f "$ZSH/oh-my-zsh.sh" ]]; then
     source "$ZSH/oh-my-zsh.sh"
