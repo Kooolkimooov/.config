@@ -5,6 +5,12 @@ fi
 
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
+sccsh(){
+    scp -r ~/.config/nvim "$1":~/.config/
+    scp -r ~/.config/lazygit "$1":~/.config/
+    ssh "$1"
+}
+
 alias cat="ccat"
 
 alias rhps1t="ssh rhps1user@rhps1t.s.aist.go.jp"
