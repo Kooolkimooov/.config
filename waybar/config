@@ -1,5 +1,6 @@
 {
   "layer": "top",
+  "output": "DP-1",
   "position": "bottom",
   "height": 20,
   "spacing": 6,
