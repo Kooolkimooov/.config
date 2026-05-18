@@ -13,14 +13,6 @@ sccsh(){
 
 alias cat="ccat"
 
-alias rhps1t="ssh rhps1user@rhps1t.s.aist.go.jp"
-alias rhps1c="ssh rhps1user@rhps1c.s.aist.go.jp"
-alias rhps1v="ssh rhps1user@rhps1v.s.aist.go.jp"
-
-# alias hrp5pt="ssh hrp5puser@hrp5pt.s.aist.go.jp"
-# alias rhps1c="ssh rhps1user@rhps1c.s.aist.go.jp"
-# alias rhps1v="ssh rhps1user@rhps1v.s.aist.go.jp"
-
 ZSH_THEME="bira"
 
 plugins=(
