@@ -12,6 +12,7 @@ sccsh(){
 }
 
 alias cat="ccat"
+alias less="cless"
 
 ZSH_THEME="bira"
 
