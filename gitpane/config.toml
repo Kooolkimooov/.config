@@ -2,6 +2,7 @@ root_dirs = ["."]
 excluded_repos = []
 pinned_repos = []
 scan_depth = 10
+theme = "muted"
 
 [watch]
 debounce_ms = 500
@@ -19,6 +20,7 @@ watch_exclude_dirs = [
     ".next",
     "Pods",
 ]
+discovery_cooldown_secs = 5
 
 [ui]
 frame_rate = 10
