@@ -1,0 +1,35 @@
+root_dirs = ["."]
+excluded_repos = []
+pinned_repos = []
+scan_depth = 10
+
+[watch]
+debounce_ms = 500
+poll_local_secs = 5
+poll_fetch_secs = 30
+max_concurrent_polls = 4
+watch_exclude_dirs = [
+    "node_modules",
+    "target",
+    ".build",
+    "dist",
+    "vendor",
+    ".venv",
+    "__pycache__",
+    ".next",
+    "Pods",
+]
+
+[ui]
+frame_rate = 10
+check_for_updates = true
+update_position = "top-right"
+
+[graph]
+branches = "all"
+label_max_len = 24
+show_stats = true
+
+[submodules]
+ignore_dirty = false
+warn_unpushed = true
