@@ -12,6 +12,7 @@ sccsh(){
 }
 
 alias cat="ccat"
+alias less="cless"
 
 alias rhps1t="ssh rhps1user@rhps1t.s.aist.go.jp"
 alias rhps1c="ssh rhps1user@rhps1c.s.aist.go.jp"
