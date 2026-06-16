@@ -26,10 +26,16 @@ window#waybar {
 #network-ethernet,
 #battery,
 #bluetooth,
-#clock {
+#clock,
+#custom-idle_inhibitor {
   color: #000000;
   background: #ffffff;
   padding: 0 8px;
+}
+
+#custom-idle_inhibitor.activated {
+  color: #ffffff;
+  background: #e67e22;
 }
 
 #workspaces button {
