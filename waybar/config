@@ -135,7 +135,7 @@
     "return-type": "json",
     "interval": "once",
     "signal": 10,
-    "format": "{}",
+    "format": "{} ",
     "tooltip": true
   },
   "custom/power": {
