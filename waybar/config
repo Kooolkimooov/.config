@@ -22,6 +22,7 @@
     "battery",
     "clock",
     "custom/capslock",
+    "custom/idle_inhibitor",
     "custom/power"
   ],
   "hyprland/workspaces": {
@@ -127,6 +128,15 @@
       "",
       ""
     ]
+  },
+  "custom/idle_inhibitor": {
+    "exec": "~/.config/waybar/scripts/idle-inhibitor.sh status",
+    "on-click": "~/.config/waybar/scripts/idle-inhibitor.sh toggle",
+    "return-type": "json",
+    "interval": "once",
+    "signal": 10,
+    "format": "{}",
+    "tooltip": true
   },
   "custom/power": {
     "format": " ",
