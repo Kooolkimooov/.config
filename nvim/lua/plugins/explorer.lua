@@ -4,7 +4,7 @@ return {
     image = {
       format = { "png", "jpg", "jpeg", "gif", "bmp", "webp", "tiff", "heic", "avif", "pdf" },
       doc = { enabled = true, inline = true, float = false },
-      math = false,
+      math = {enabled = false},
     },
     picker = {
       hidden = true,

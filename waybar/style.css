@@ -1,6 +1,6 @@
 * {
   border: none;
-  border-radius: 0;
+  border-radius: 10;
   box-shadow: none;
   min-height: 0;
   font-family: "JetBrainsMono Nerd Font";
@@ -21,6 +21,7 @@ window#waybar {
 #custom-gpu_temp,
 #custom-gpu_fan,
 #custom-hotspot_status,
+#custom-power,
 #network,
 #network-wifi,
 #network-ethernet,
@@ -30,12 +31,13 @@ window#waybar {
 #custom-idle_inhibitor {
   color: #000000;
   background: #ffffff;
-  padding: 0 8px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 #custom-idle_inhibitor.activated {
   color: #ffffff;
-  background: #e67e22;
+  background: #0000ff;
 }
 
 #workspaces button {
@@ -47,12 +49,12 @@ window#waybar {
 #workspaces button.active,
 #workspaces button.focused {
   color: #ffffff;
-  background: #1a1a1a;
+  background: #000000;
 }
 
 #workspaces button.urgent {
   color: #ffffff;
-  background: #c0392b;
+  background: #0000ff;
 }
 
 #submap {
