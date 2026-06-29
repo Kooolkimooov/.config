@@ -42,11 +42,11 @@ window#waybar {
 
 #workspaces button {
   color: #000000;
-  font-weight: 200;
   background: transparent;
   padding: 0 6px;
+  font-weight: 900;
   min-width: 20px;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 #workspaces button:hover {
@@ -57,7 +57,6 @@ window#waybar {
 #workspaces button.focused {
   color: #ffffff;
   background: #000000;
-  font-weight: 900;
   padding: 0 15px;
   min-width: 30px;
 }
