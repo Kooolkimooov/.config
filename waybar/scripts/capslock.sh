@@ -9,4 +9,4 @@ for led in /sys/class/leds/*capslock*/brightness; do
   fi
 done
 
-printf '{"text":"","class":"unlocked"}\n'
+printf '{"text":" ","class":"unlocked"}\n'

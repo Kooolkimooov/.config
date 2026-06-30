@@ -66,18 +66,32 @@ window#waybar {
   background: #0000ff;
 }
 
-#submap {
+#custom-submap {
+  padding: 0;
+  color: transparent;
+  background: transparent;
+  min-width: 0px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#custom-submap.active {
   color: #ffffff;
   background: #ff0000;
   padding: 0 8px;
+  min-width: 20px;
 }
 
 #custom-capslock {
   padding: 0;
+  color: transparent;
+  background: transparent;
+  min-width: 0px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 #custom-capslock.locked {
   color: #ffffff;
   background: #ff0000;
   padding: 0 8px;
+  min-width: 20px;
 }
