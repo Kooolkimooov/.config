@@ -1,12 +1,23 @@
-#!/bin/sh
+#!/bin/bash
 
-# Show CAPS when any keyboard capslock LED is on.
-for led in /sys/class/leds/*capslock*/brightness; do
-  [ -r "$led" ] || continue
-  if [ "$(cat "$led" 2>/dev/null)" = "1" ]; then
-    printf '{"text":"CAPS","class":"locked"}\n'
+led_file=$(ls /sys/class/leds/*capslock*/brightness 2>/dev/null | head -n 1)
+
+if [ -z "$led_file" ]; then
+    echo '{"text":" ","class":"unlocked"}'
     exit 0
-  fi
-done
+fi
 
-printf '{"text":" ","class":"unlocked"}\n'
+last_state=""
+
+while true; do
+    state=$(cat "$led_file" 2>/dev/null)
+    if [ "$state" != "$last_state" ]; then
+        if [ "$state" = "1" ]; then
+            echo '{"text":"CAPS","class":"locked"}'
+        else
+            echo '{"text":" ","class":"unlocked"}'
+        fi
+        last_state="$state"
+    fi
+    sleep 0.1
+done
