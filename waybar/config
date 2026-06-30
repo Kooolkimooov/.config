@@ -31,7 +31,7 @@
     "all-outputs": true
   },
   "custom/submap": {
-    "exec": "~/.config/waybar/scripts/submap.sh",
+    "exec": "exec ~/.config/waybar/scripts/submap.sh",
     "return-type": "json",
     "tooltip": false
   },
@@ -107,7 +107,7 @@
     "format-alt": "{:%Y-%m-%d}"
   },
   "custom/capslock": {
-    "exec": "~/.config/waybar/scripts/capslock.sh",
+    "exec": "exec ~/.config/waybar/scripts/capslock.sh",
     "return-type": "json",
     "format": "{}",
     "tooltip": false
