@@ -5,7 +5,7 @@
   "spacing": 6,
   "modules-left": [
     "hyprland/workspaces",
-    "hyprland/submap",
+    "custom/submap",
     "hyprland/window"
   ],
   "modules-right": [
@@ -30,8 +30,10 @@
     "format": "{name}",
     "all-outputs": true
   },
-  "hyprland/submap": {
-    "format": "{}"
+  "custom/submap": {
+    "exec": "~/.config/waybar/scripts/submap.sh",
+    "return-type": "json",
+    "tooltip": false
   },
   "hyprland/window": {
     "format": "{title}",
