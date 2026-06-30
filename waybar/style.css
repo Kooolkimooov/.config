@@ -27,17 +27,26 @@ window#waybar {
 #network-ethernet,
 #battery,
 #bluetooth,
-#clock,
-#custom-idle_inhibitor {
+#clock {
   color: #000000;
   background: #ffffff;
   padding-left: 10px;
   padding-right: 10px;
 }
 
+#custom-idle_inhibitor {
+  color: #000000;
+  background: transparent;
+  padding: 0 10px;
+  min-width: 20px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
 #custom-idle_inhibitor.activated {
   color: #ffffff;
   background: #0000ff;
+  padding: 0 15px;
+  min-width: 30px;
 }
 
 #workspaces button {
@@ -71,14 +80,15 @@ window#waybar {
   color: transparent;
   background: transparent;
   min-width: 0px;
+  font-weight: 900;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 #custom-submap.active {
   color: #ffffff;
   background: #ff0000;
-  padding: 0 8px;
-  min-width: 20px;
+  padding: 0 15px;
+  min-width: 30px;
 }
 
 #custom-capslock {
@@ -86,12 +96,13 @@ window#waybar {
   color: transparent;
   background: transparent;
   min-width: 0px;
+  font-weight: 900;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 #custom-capslock.locked {
   color: #ffffff;
   background: #ff0000;
-  padding: 0 8px;
-  min-width: 20px;
+  padding: 0 15px;
+  min-width: 30px;
 }
