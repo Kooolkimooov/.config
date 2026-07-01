@@ -11,13 +11,14 @@ vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 vim.opt.list = true -- Show whitespace characters
 vim.opt.listchars:append({ space = "∙" }) -- Render spaces as a larger dot-like glyph
 
-local function set_whitespace_hl()
+local function set_custom_hl()
   vim.api.nvim_set_hl(0, "Whitespace", { fg = "#acb0be", ctermfg = 245 })
+  vim.api.nvim_set_hl(0, "CursorInsert", { fg = "#ffffff", bg = "#0000ff", bold = true })
 end
 
-set_whitespace_hl()
+set_custom_hl()
 vim.api.nvim_create_autocmd("ColorScheme", {
-  callback = set_whitespace_hl,
+  callback = set_custom_hl,
 })
 
 -- Enable transparent background
@@ -30,3 +31,7 @@ local zsh = vim.fn.exepath("zsh")
 if zsh ~= "" then
   vim.opt.shell = zsh
 end
+
+-- Highly visible cursor: Solid block everywhere, fast blinking and bright green in insert mode
+vim.opt.guicursor = "n-v-c-sm:block-Cursor,i-ci-ve:block-CursorInsert-blinkwait300-blinkon200-blinkoff150,r-cr-o:hor20-Cursor"
+
