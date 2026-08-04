@@ -131,7 +131,7 @@ hl.config({
 
         -- https://wiki.hypr.land/Configuring/Basics/Variables/#blur
         blur = {
-            enabled  = true,
+            enabled  = false, -- temporarily disabled to test nvidia-drm atomic commit flicker
             size     = 10,
             passes   = 1,
             vibrancy = 0.1696,
@@ -215,6 +215,13 @@ hl.config({
         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
         -- vrr = 1, -- causes flickers
         vrr = 0,
+    },
+})
+
+-- https://wiki.hypr.land/Configuring/Basics/Variables/#render
+hl.config({
+    render = {
+        direct_scanout = false, -- temporarily disabled to test nvidia-drm atomic commit flicker
     },
 })
 
