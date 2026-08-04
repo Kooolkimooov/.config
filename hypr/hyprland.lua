@@ -46,7 +46,7 @@ local menu        = "hyprlauncher"
 
 -- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 hl.on("hyprland.start", function()
-    hl.exec_cmd("qs -d -n -c caelestia")
+    hl.exec_cmd("caelestia shell -d")
     hl.exec_cmd("hypridle")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hyprctl setcursor rose-pine-hyprcursor 24")
@@ -278,7 +278,7 @@ hl.bind(mainModShift .. " + Escape", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainModShift .. " + F", hl.dsp.window.float())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
-hl.bind(mainMod .. " + Space", hl.dsp.exec_cmd("qs -c caelestia ipc call drawers toggle launcher"))
+hl.bind(mainMod .. " + Space", hl.dsp.global("caelestia:launcher"))
 hl.bind(mainModCtrl .. " + T", hl.dsp.window.pin())
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo()) -- dwindle
