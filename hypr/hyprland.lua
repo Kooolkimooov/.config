@@ -297,6 +297,7 @@ hl.bind(mainModCtrl .. " + left",  hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainModCtrl .. " + right", hl.dsp.focus({ workspace = "e+1" }))
 
 hl.bind(mainModCtrl .. " + W", hl.dsp.exec_cmd("qs -c caelestia kill || qs -n -d -c caelestia"))
+hl.bind(mainModCtrl .. " + V", hl.dsp.exec_cmd("caelestia shell nexus openPage audio 1"))
 hl.bind(mainModCtrl .. " + P", hl.dsp.exec_cmd("pkill hyprpaper || hyprpaper"))
 
 hl.bind(mainModCtrl .. " + N", hl.dsp.exec_cmd("qs -c caelestia ipc call drawers toggle sidebar"))
