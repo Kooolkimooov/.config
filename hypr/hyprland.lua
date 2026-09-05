@@ -9,7 +9,7 @@
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
 hl.monitor({
-    output            = "DP-2",
+    output            = "DP-1",
     mode              = "2560x1440@280.00",
     position          = "0x96",
     scale             = 1.00,
@@ -22,10 +22,10 @@ hl.monitor({
 })
 
 hl.monitor({
-    output    = "DP-1",
+    output    = "DP-2",
     mode      = "1920x1080@165.00",
     position  = "-1080x-320",
-    scale     = 1.00,
+    scale     = 1.0,
     transform = 3,
 })
 
@@ -49,6 +49,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("hypridle")
     hl.exec_cmd("hyprpaper")
     hl.exec_cmd("hyprctl setcursor rose-pine-hyprcursor 24")
+
     -- hl.exec_cmd("swaync")
     -- hl.exec_cmd("hyprsunset")
     -- hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/sync-theme-from-hyprsunset.sh")
@@ -399,19 +400,19 @@ hl.window_rule({
     float = true,
     pin   = true,
     size  = pipW .. " " .. pipH,
-    move  = "monitor_w-" .. pipW .. "-" .. pipMargin .. " monitor_h-" .. pipH .. "-" .. pipMargin .. "-20",
+    move  = "monitor_w-" .. pipW .. "-" .. pipMargin .. " monitor_h-" .. pipH .. "-" .. pipMargin .. "-40",
 })
 
-hl.workspace_rule({ workspace = "1",  monitor = "DP-1", default = true })
-hl.workspace_rule({ workspace = "2",  monitor = "DP-1" })
-hl.workspace_rule({ workspace = "3",  monitor = "DP-1" })
-hl.workspace_rule({ workspace = "4",  monitor = "DP-1" })
-hl.workspace_rule({ workspace = "5",  monitor = "DP-1" })
-hl.workspace_rule({ workspace = "6",  monitor = "DP-2" })
-hl.workspace_rule({ workspace = "7",  monitor = "DP-2" })
-hl.workspace_rule({ workspace = "8",  monitor = "DP-2" })
-hl.workspace_rule({ workspace = "9",  monitor = "DP-2" })
-hl.workspace_rule({ workspace = "10", monitor = "DP-2", default = true })
+hl.workspace_rule({ workspace = "1",  monitor = "DP-2", default = true })
+hl.workspace_rule({ workspace = "2",  monitor = "DP-2" })
+hl.workspace_rule({ workspace = "3",  monitor = "DP-2" })
+hl.workspace_rule({ workspace = "4",  monitor = "DP-2" })
+hl.workspace_rule({ workspace = "5",  monitor = "DP-2" })
+hl.workspace_rule({ workspace = "6",  monitor = "DP-1" })
+hl.workspace_rule({ workspace = "7",  monitor = "DP-1" })
+hl.workspace_rule({ workspace = "8",  monitor = "DP-1" })
+hl.workspace_rule({ workspace = "9",  monitor = "DP-1" })
+hl.workspace_rule({ workspace = "10", monitor = "DP-1", default = true })
 
 hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
