@@ -53,8 +53,7 @@ hl.on("hyprland.start", function()
     -- hl.exec_cmd("swaync")
     -- hl.exec_cmd("hyprsunset")
     -- hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/sync-theme-from-hyprsunset.sh")
-
-    hl.exec_cmd("nmcli connection up Hotspot")
+    -- hl.exec_cmd("nmcli connection up Hotspot")
 end)
 
 
