@@ -14,6 +14,21 @@ sccsh(){
 alias cat="ccat"
 alias less="cless"
 
+agents() {
+  local name="${PWD:t}"
+  name="${name//[.:]/-}"   # tmux disallows . and : in session names
+
+  if tmux has-session -t "=$name" 2>/dev/null; then
+    tmux attach -t "=$name"
+    return
+  fi
+
+  tmux new-session  -d -s "$name" -n claude -c "$PWD" claude
+  tmux new-window      -t "=$name" -n codex  -c "$PWD" codex
+  tmux select-window -t "=$name:claude"
+  tmux attach -t "=$name"
+}
+
 ZSH_THEME="bira"
 
 plugins=(
