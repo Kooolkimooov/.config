@@ -22,6 +22,21 @@ alias rhps1v="ssh rhps1user@rhps1v.s.aist.go.jp"
 # alias rhps1c="ssh rhps1user@rhps1c.s.aist.go.jp"
 # alias rhps1v="ssh rhps1user@rhps1v.s.aist.go.jp"
 
+agents() {
+  local name="${PWD:t}"
+  name="${name//[.:]/-}"   # tmux disallows . and : in session names
+
+  if tmux has-session -t "=$name" 2>/dev/null; then
+    tmux attach -t "=$name"
+    return
+  fi
+
+  tmux new-session  -d -s "$name" -n claude -c "$PWD" claude
+  tmux new-window      -t "=$name" -n codex  -c "$PWD" codex
+  tmux select-window -t "=$name:claude"
+  tmux attach -t "=$name"
+}
+
 ZSH_THEME="bira"
 
 plugins=(
