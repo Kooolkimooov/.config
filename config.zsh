@@ -37,6 +37,21 @@ agents() {
   tmux attach -t "=$name"
 }
 
+training() {
+  local name="${PWD:t}_training"
+  name="${name//[.:]/-}"   # tmux disallows . and : in session names
+
+  if tmux has-session -t "=$name" 2>/dev/null; then
+    tmux attach -t "=$name"
+    return
+  fi
+
+  tmux new-session  -d -s "$name" -n tensorboard -c "$PWD" uv run tensorboard logs
+  tmux new-window      -t "=$name" -n training  -c "$PWD"
+  tmux select-window -t "=$name:claude"
+  tmux attach -t "=$name"
+}
+
 ZSH_THEME="bira"
 
 plugins=(
