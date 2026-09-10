@@ -46,9 +46,10 @@ training() {
     return
   fi
 
-  tmux new-session  -d -s "$name" -n tensorboard -c "$PWD" uv run tensorboard logs
+  tmux new-session  -d -s "$name" -n tensorboard -c "$PWD"
+  tmux send-keys       -t "=${name}:tensorboard" 'uv run tensorboard --logdir logs' Enter
   tmux new-window      -t "=$name" -n training  -c "$PWD"
-  tmux select-window -t "=$name:claude"
+  tmux select-window   -t "=${name}:tensorboard"
   tmux attach -t "=$name"
 }
 
