@@ -1,0 +1,15 @@
+theme = "catppuccin-latte"
+
+eq_preset = "Custom"
+eq = [4, 4, 2, -1, -2, 2, 4, 5, 5, 5]
+repeat = "Off"
+visualizer = "ClassicPeak"
+
+shuffle = true
+
+[spotify]
+bitrate   = 320
+
+[ytmusic]
+enabled      = true
+cookies_from = "chrome"
