@@ -25,6 +25,30 @@ for item in "$SOURCE"/*; do
   fi
 done
 
+# Greeter files: copied out of $HOME because the greeter runs as the `greeter`
+# system user, which cannot traverse this 0700 home directory.
+if command -v hyprlogin >/dev/null 2>&1; then
+  echo -e "  \033[32m→ greeter\033[0m"
+  sudo install -Dvm644 "$SOURCE/hypr/hyprlock-theme.conf" /etc/hyprlogin/hyprlock-theme.conf | sed 's/^/    /'
+  sudo install -Dvm644 "$SOURCE/hypr/hyprlogin.conf" /etc/hyprlogin/hyprlogin.conf | sed 's/^/    /'
+  sudo install -Dvm644 "$SOURCE/hypr/hyprland-greeter.lua" /etc/hyprlogin/hyprland-greeter.lua | sed 's/^/    /'
+  sudo install -Dvm644 "$SOURCE/hypr/greetd-config.toml" /etc/greetd/config.toml | sed 's/^/    /'
+
+  # follow whatever hyprlock.conf currently points at
+  WALLPAPER=$(sed -n 's/^[[:space:]]*\$wallpaper[[:space:]]*=[[:space:]]*//p' \
+    "$SOURCE/hypr/hyprlock.conf" | tail -n1 | sed 's/[[:space:]]*#.*$//; s/[[:space:]]*$//')
+  WALLPAPER="${WALLPAPER/#\~/$HOME}"
+  WALLPAPER="${WALLPAPER/#\$HOME/$HOME}"
+
+  if [ -r "$WALLPAPER" ]; then
+    sudo install -Dvm644 "$WALLPAPER" /usr/share/hyprlogin/wallpaper | sed 's/^/    /'
+  else
+    echo -e "  \033[31m⊘ wallpaper (not readable: $WALLPAPER)\033[0m"
+  fi
+else
+  echo -e "  \033[31m⊘ greeter (hyprlogin not installed)\033[0m"
+fi
+
 # Sync all .zsh files from repo to custom dir
 for zsh_file in "$SOURCE"/*.zsh; do
   [ -e "$zsh_file" ] || continue
