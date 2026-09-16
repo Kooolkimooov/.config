@@ -4,9 +4,7 @@
 
 local map = vim.keymap.set
 
-local keys = { "&", "é", '"', "'", "(", "-", "è", "_", "ç" }
+local keys = { "&", "é", '"', "'", "(", "-", "è", "_", "ç", "à" }
 for i, key in ipairs(keys) do
-  map("n", "<C-" .. key .. ">", "<cmd>BufferLineGoToBuffer " .. i .. "<CR>", { silent = true })
+  map("n", "<M-" .. key .. ">", "<cmd>BufferLineGoToBuffer " .. i .. "<CR>", { silent = true })
 end
-
-
