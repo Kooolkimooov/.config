@@ -2,22 +2,81 @@
 DEST="$(dirname "$0")"
 ZSH_CUSTOM_DIR="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 
+usage() {
+  echo "Usage: $(basename "$0") [name...]"
+  echo ""
+  echo "  no args   sync every config already tracked in the repo, plus all .zsh files"
+  echo "  name...   pull specific configs out of ~/.config (or $ZSH_CUSTOM_DIR),"
+  echo "            even if they are not in the repo yet"
+  echo ""
+  echo "Examples:"
+  echo "  $(basename "$0")                  # sync everything already tracked"
+  echo "  $(basename "$0") btop fuzzel      # start tracking btop and fuzzel"
+  echo "  $(basename "$0") hypr/hyprland.conf"
+  echo "  $(basename "$0") example.zsh"
+}
+
+# copy_into_repo <source path> <path relative to repo root>
+copy_into_repo() {
+  local src="$1" rel="$2" parent
+  parent="$(dirname "$DEST/$rel")"
+  mkdir -p "$parent"
+  echo -e "  \033[32m→ $rel\033[0m"
+  cp -r "$src" "$parent/"
+  [ -d "$DEST/$rel" ] && find "$DEST/$rel" -type d -name '.git' -exec rm -rf {} + 2>/dev/null
+  return 0
+}
+
+case "$1" in
+  -h|--help) usage; exit 0 ;;
+esac
+
+# Named mode: grab exactly what was asked for, tracked or not
+if [ "$#" -gt 0 ]; then
+  echo "Copying named configs into $DEST"
+  status=0
+  for name in "$@"; do
+    # tolerate tab-completed paths and trailing slashes
+    name="${name%/}"
+    name="${name#./}"
+    name="${name#$HOME/.config/}"
+    name="${name#$ZSH_CUSTOM_DIR/}"
+
+    case "/$name/" in
+      //*|*/../*)
+        echo -e "  \033[31m⊘ $name (must be a name inside ~/.config or $ZSH_CUSTOM_DIR)\033[0m"
+        status=1
+        continue
+        ;;
+    esac
+
+    if [ -e "$HOME/.config/$name" ]; then
+      copy_into_repo "$HOME/.config/$name" "$name"
+    elif [ -e "$ZSH_CUSTOM_DIR/$name" ]; then
+      copy_into_repo "$ZSH_CUSTOM_DIR/$name" "$(basename "$name")"
+    elif [ -e "$ZSH_CUSTOM_DIR/$name.zsh" ]; then
+      copy_into_repo "$ZSH_CUSTOM_DIR/$name.zsh" "$(basename "$name").zsh"
+    else
+      echo -e "  \033[31m⊘ $name (not found in ~/.config or $ZSH_CUSTOM_DIR)\033[0m"
+      status=1
+    fi
+  done
+  echo "Done"
+  exit $status
+fi
+
 echo "Copying from ~/.config to $DEST and $ZSH_CUSTOM_DIR"
 
 # Sync all .zsh files from custom dir to repo
 for zsh_file in "$ZSH_CUSTOM_DIR"/*.zsh; do
   [ -e "$zsh_file" ] || continue
-  basename_zsh=$(basename "$zsh_file")
-  echo -e "  \033[32m→ $basename_zsh\033[0m"
-  cp "$zsh_file" "$DEST/$basename_zsh"
+  copy_into_repo "$zsh_file" "$(basename "$zsh_file")"
 done
 
 for item in ~/.config/*; do
   basename_item=$(basename "$item")
   if [ -d "$DEST/$basename_item" ]; then
-    echo -e "  \033[32m→ $basename_item\033[0m"
-    cp -r "$item" "$DEST"
-    find "$DEST/$basename_item" -type d -name '.git' -exec rm -rf {} + 2>/dev/null
+    copy_into_repo "$item" "$basename_item"
   else
     echo -e "  \033[31m⊘ $basename_item (skipped)\033[0m"
   fi
