@@ -114,7 +114,7 @@
             "activeIndicator": true,
             "activeTrail": true,
             "occupiedBg": true,
-            "perMonitorWorkspaces": true,
+            "perMonitor": true,
             "showWindows": true,
             "shown": 10
         }
@@ -154,8 +154,8 @@
     },
     "services": {
         "lyricsBackend": "Auto",
-        "useFahrenheit": false,
-        "useTwelveHourClock": false
+        "weatherUnits": "Celsius",
+        "clockFormat": "TwentyFourHour"
     },
     "utilities": {
         "enabled": true,
