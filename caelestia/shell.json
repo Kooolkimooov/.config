@@ -116,7 +116,69 @@
             "occupiedBg": true,
             "perMonitor": true,
             "showWindows": true,
-            "shown": 10
+            "shown": 10,
+            "specialWorkspaceIcons": [
+                {
+                    "icon": "counter_1",
+                    "name": "s1"
+                },
+                {
+                    "icon": "counter_2",
+                    "name": "s2"
+                },
+                {
+                    "icon": "counter_3",
+                    "name": "s3"
+                },
+                {
+                    "icon": "counter_4",
+                    "name": "s4"
+                },
+                {
+                    "icon": "counter_5",
+                    "name": "s5"
+                },
+                {
+                    "icon": "counter_6",
+                    "name": "s6"
+                },
+                {
+                    "icon": "counter_7",
+                    "name": "s7"
+                },
+                {
+                    "icon": "counter_8",
+                    "name": "s8"
+                },
+                {
+                    "icon": "counter_9",
+                    "name": "s9"
+                },
+                {
+                    "icon": "counter_0",
+                    "name": "s10"
+                },
+                {
+                    "icon": "star",
+                    "name": "special"
+                },
+                {
+                    "icon": "forum",
+                    "name": "communication"
+                },
+                {
+                    "icon": "music_cast",
+                    "name": "music"
+                },
+                {
+                    "icon": "checklist",
+                    "name": "todo"
+                },
+                {
+                    "icon": "monitor_heart",
+                    "name": "sysmon"
+                }
+            ]
         }
     },
     "border": {

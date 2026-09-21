@@ -118,6 +118,8 @@ hl.config({
         rounding       = 10,
         rounding_power = 2,
 
+        dim_special = 0.8,
+
         -- Change transparency of focused and unfocused windows
         active_opacity   = 1.0,
         inactive_opacity = 1.0,
@@ -171,6 +173,12 @@ hl.animation({ leaf = "workspaces",    enabled = true, speed = 1.94, bezier = "a
 hl.animation({ leaf = "workspacesIn",  enabled = true, speed = 1.21, bezier = "almostLinear", style = "slide" })
 hl.animation({ leaf = "workspacesOut", enabled = true, speed = 1.94, bezier = "almostLinear", style = "slide" })
 hl.animation({ leaf = "zoomFactor",    enabled = true, speed = 7,    bezier = "quick" })
+
+-- Special workspace (scratchpad) entrance.
+-- Styles: slide | slidevert | slidefade | slidefadevert, plus an optional
+-- percentage for how far it travels. Hyprland exposes no direction option, so
+-- it enters from the top; a smaller percentage makes that less pronounced.
+hl.animation({ leaf = "specialWorkspace", enabled = true, speed = 1, bezier = "easeOutQuint", style = "slidefadevert -100%" })
 
 -- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
 -- "Smart gaps" / "No gaps when only"
@@ -333,9 +341,16 @@ hl.bind(mainModShift .. " + underscore",  hl.dsp.window.move({ workspace = "8" }
 hl.bind(mainModShift .. " + ccedilla",    hl.dsp.window.move({ workspace = "9" }))
 hl.bind(mainModShift .. " + agrave",      hl.dsp.window.move({ workspace = "10" }))
 
--- Example special workspace (scratchpad)
--- hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
--- hl.bind(mainModShift .. " + S", hl.dsp.window.move({ workspace = "special:magic" }))
+-- Per-workspace scratchpad: Mod+S toggles "special:s<N>" for the workspace you
+-- are on, Mod+Shift+S throws the focused window into it. Needs a script because
+-- the target name depends on the active workspace, which the config cannot know.
+local specialWs = os.getenv("HOME") .. "/.config/hypr/scripts/special-per-workspace.sh"
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(specialWs))
+hl.bind(mainModShift .. " + S", hl.dsp.exec_cmd(specialWs .. " move"))
+
+-- Music scratchpad: Spotify + cliamp, on any workspace
+hl.bind(mainMod .. " + M", hl.dsp.workspace.toggle_special("music"))
+hl.bind(mainModShift .. " + M", hl.dsp.window.move({ workspace = "special:music" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 -- hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -413,6 +428,43 @@ hl.workspace_rule({ workspace = "7",  monitor = "DP-1" })
 hl.workspace_rule({ workspace = "8",  monitor = "DP-1" })
 hl.workspace_rule({ workspace = "9",  monitor = "DP-1" })
 hl.workspace_rule({ workspace = "10", monitor = "DP-1", default = true })
+
+-- Inset the scratchpad so the workspace underneath stays visible around it,
+-- as a reminder that it is a special workspace and not a normal one.
+-- Tune gaps_out for how much of the workspace below shows through;
+-- decoration.dim_special (default 0.2) controls how much that one is dimmed.
+hl.workspace_rule({ workspace = "special:special", gaps_out = 60 })
+
+-- Same inset for every per-workspace scratchpad, and a terminal waiting in each
+-- one the first time it is opened
+for i = 1, 10 do
+    hl.workspace_rule({
+        workspace        = "special:s" .. i,
+        gaps_out         = 60,
+        on_created_empty = terminal,
+    })
+end
+
+-- Music scratchpad. on_created_empty runs the first time it is opened, so the
+-- players start on demand rather than at login; the window rules keep them
+-- there if they are launched some other way.
+hl.workspace_rule({
+    workspace        = "special:music",
+    gaps_out         = 60,
+    on_created_empty = "sh -c 'spotify-launcher & exec kitty --class cliamp -e cliamp'",
+})
+hl.window_rule({
+    name  = "music-spotify",
+    match = { class = "^([Ss]potify|spotify-launcher)$" },
+
+    workspace = "special:music",
+})
+hl.window_rule({
+    name  = "music-cliamp",
+    match = { class = "^(cliamp)$" },
+
+    workspace = "special:music",
+})
 
 hl.window_rule({
     -- Ignore maximize requests from all apps. You'll probably like this.
