@@ -1,0 +1,53 @@
+roots = ["~/git", "~/workspace/"]
+max_depth = 4
+follow_nested_repos = true
+follow_symlinks = true
+exclude = [
+    "riffle-testbed/**",
+    "riffle-pr-testbed/**",
+    "riffle-merge-test/**",
+]
+prune = []
+
+[refresh]
+interval = "5m"
+watch = true
+debounce = "1s"
+
+[status]
+untracked = "normal"
+max_files = 200
+max_age = "1h"
+
+[remote]
+fetch = true
+interval = "1h"
+concurrency = 4
+timeout = "20s"
+
+[release]
+tag_pattern = "*[0-9]*"
+max_subjects = 30
+read_changelog = true
+changelog_files = [
+    "CHANGELOG.md",
+    "CHANGELOG",
+    "changelog.md",
+]
+
+[ui]
+default_filters = []
+default_sort = "activity"
+default_since = ""
+editor_command = [
+    "nvim",
+    "{path}",
+]
+git_client_command = [
+    "lazygit",
+    "{path}",
+]
+terminal_command = [
+    "kitty",
+    "{path}",
+]
