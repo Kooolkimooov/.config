@@ -49,6 +49,26 @@ else
   echo -e "  \033[31m⊘ greeter (hyprlogin not installed)\033[0m"
 fi
 
+# Colour schemes: the caelestia CLI only reads schemes from its own data dir,
+# so install ours there. Ask the CLI's interpreter for the dir so this survives
+# Python version bumps.
+if command -v caelestia >/dev/null 2>&1; then
+  CLI_PYTHON=$(head -n1 "$(command -v caelestia)" | sed 's/^#![[:space:]]*//')
+  SCHEME_DIR=$($CLI_PYTHON -I -c 'from caelestia.utils.paths import scheme_data_dir; print(scheme_data_dir)' 2>/dev/null)
+
+  if [ -n "$SCHEME_DIR" ]; then
+    for scheme in "$SOURCE"/caelestia/schemes/*/; do
+      [ -d "$scheme" ] || continue
+      echo -e "  \033[32m→ scheme $(basename "$scheme")\033[0m"
+      (cd "$scheme" && find . -type f -name '*.txt' -exec sudo install -Dvm644 {} "$SCHEME_DIR/$(basename "$scheme")/{}" \;) | sed 's/^/    /'
+    done
+  else
+    echo -e "  \033[31m⊘ schemes (could not locate the caelestia CLI scheme dir)\033[0m"
+  fi
+else
+  echo -e "  \033[31m⊘ schemes (caelestia CLI not installed)\033[0m"
+fi
+
 # Sync all .zsh files from repo to custom dir
 for zsh_file in "$SOURCE"/*.zsh; do
   [ -e "$zsh_file" ] || continue
