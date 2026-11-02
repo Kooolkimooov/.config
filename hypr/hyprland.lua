@@ -36,7 +36,6 @@ hl.monitor({
 -- Set programs that you use
 local terminal    = "kitty"
 local fileManager = "dolphin"
-local menu        = "hyprlauncher"
 
 
 -------------------
@@ -47,11 +46,10 @@ local menu        = "hyprlauncher"
 hl.on("hyprland.start", function()
     hl.exec_cmd("caelestia shell -d")
     hl.exec_cmd("hypridle")
-    hl.exec_cmd("hyprpaper")
     hl.exec_cmd("systemctl --user start hyprpolkitagent.service")
+    hl.exec_cmd("wl-paste --watch cliphist store") -- history for `caelestia clipboard`
     hl.exec_cmd("hyprctl setcursor rose-pine-hyprcursor 24")
 
-    -- hl.exec_cmd("swaync")
     -- hl.exec_cmd("hyprsunset")
     -- hl.exec_cmd(os.getenv("HOME") .. "/.config/hypr/scripts/sync-theme-from-hyprsunset.sh")
     -- hl.exec_cmd("nmcli connection up Hotspot")
@@ -282,15 +280,15 @@ local mainMod      = "SUPER" -- Sets "Windows" key as main modifier
 local mainModShift = "SUPER + SHIFT"
 local mainModCtrl  = "SUPER + CTRL"
 
-hl.bind("CTRL + SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region"))
+-- Screenshots via the shell's area picker (freezes the screen while selecting)
+hl.bind("CTRL + SHIFT + Print", hl.dsp.global("caelestia:screenshotFreeze"))
+hl.bind("Print",              hl.dsp.global("caelestia:screenshotFreezeClip"))
 
 -- Example binds, see https://wiki.hypr.land/Configuring/Basics/Binds/ for more
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainModShift .. " + A", hl.dsp.window.close())
-hl.bind(mainModShift .. " + E", hl.dsp.exec_cmd(
-    "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
-))
-hl.bind(mainModShift .. " + Escape", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mainModShift .. " + E", hl.dsp.global("caelestia:session"))
+hl.bind(mainModShift .. " + Escape", hl.dsp.exec_cmd("pidof hyprlock || hyprlock"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainModShift .. " + F", hl.dsp.window.float())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
@@ -307,9 +305,16 @@ hl.bind(mainModCtrl .. " + right", hl.dsp.focus({ workspace = "e+1" }))
 
 hl.bind(mainModCtrl .. " + W", hl.dsp.exec_cmd("qs -c caelestia kill || qs -n -d -c caelestia"))
 hl.bind(mainModCtrl .. " + V", hl.dsp.exec_cmd("caelestia shell nexus openPage audio 1"))
-hl.bind(mainModCtrl .. " + P", hl.dsp.exec_cmd("pkill hyprpaper || hyprpaper"))
 
-hl.bind(mainModCtrl .. " + N", hl.dsp.exec_cmd("qs -c caelestia ipc call drawers toggle sidebar"))
+hl.bind(mainModCtrl .. " + P", hl.dsp.exec_cmd("qs -c caelestia ipc call wallpaper next"))
+hl.bind(mainModCtrl .. " + N", hl.dsp.global("caelestia:sidebar"))
+hl.bind(mainModCtrl .. " + D", hl.dsp.global("caelestia:dashboard"))
+hl.bind(mainModCtrl .. " + U", hl.dsp.global("caelestia:utilities"))
+hl.bind(mainModCtrl .. " + B", hl.dsp.global("caelestia:toggleDnd"))
+hl.bind(mainModCtrl .. " + X", hl.dsp.global("caelestia:clearNotifs"))
+hl.bind(mainMod .. " + Tab", hl.dsp.global("caelestia:showall"))
+hl.bind(mainModCtrl .. " + C", hl.dsp.exec_cmd("caelestia clipboard"))
+hl.bind(mainMod .. " + semicolon", hl.dsp.exec_cmd("caelestia emoji -p"))
 
 -- Move focus with mainMod + arrow keys
 hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
@@ -365,14 +370,16 @@ hl.bind("XF86AudioRaiseVolume",  hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT
 hl.bind("XF86AudioLowerVolume",  hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"),      { locked = true, repeating = true })
 hl.bind("XF86AudioMute",         hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"),     { locked = true, repeating = true })
 hl.bind("XF86AudioMicMute",      hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"),   { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessUp",   hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%+"),                  { locked = true, repeating = true })
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("brightnessctl -e4 -n2 set 5%-"),                  { locked = true, repeating = true })
+-- The shell drives brightness through ddcutil, so it also works on external monitors
+hl.bind("XF86MonBrightnessUp",   hl.dsp.global("caelestia:brightnessUp"),   { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.global("caelestia:brightnessDown"), { locked = true, repeating = true })
 
--- Requires playerctl
-hl.bind("XF86AudioNext",  hl.dsp.exec_cmd("playerctl next"),       { locked = true })
-hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPlay",  hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
-hl.bind("XF86AudioPrev",  hl.dsp.exec_cmd("playerctl previous"),   { locked = true })
+-- Media keys control the shell's active player (the one the dashboard shows)
+hl.bind("XF86AudioNext",  hl.dsp.global("caelestia:mediaNext"),   { locked = true })
+hl.bind("XF86AudioPause", hl.dsp.global("caelestia:mediaToggle"), { locked = true })
+hl.bind("XF86AudioPlay",  hl.dsp.global("caelestia:mediaToggle"), { locked = true })
+hl.bind("XF86AudioPrev",  hl.dsp.global("caelestia:mediaPrev"),   { locked = true })
+hl.bind("XF86AudioStop",  hl.dsp.global("caelestia:mediaStop"),   { locked = true })
 
 -- Switch to a submap called `resize`.
 hl.bind(mainMod .. " + R", hl.dsp.submap("resize"))
