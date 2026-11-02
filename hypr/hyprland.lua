@@ -46,6 +46,7 @@ local fileManager = "dolphin"
 hl.on("hyprland.start", function()
     hl.exec_cmd("caelestia shell -d")
     hl.exec_cmd("hypridle")
+    hl.exec_cmd("fcitx5")
     hl.exec_cmd("systemctl --user start hyprpolkitagent.service")
     hl.exec_cmd("wl-paste --watch cliphist store") -- history for `caelestia clipboard`
     hl.exec_cmd("hyprctl setcursor rose-pine-hyprcursor 24")
