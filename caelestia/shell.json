@@ -60,7 +60,8 @@
         "clock": {
             "background": true,
             "showDate": true,
-            "showIcon": false
+            "showIcon": false,
+            "showSeconds": true
         },
         "dragThreshold": 20,
         "excludedScreens": [
@@ -119,64 +120,94 @@
             "shown": 10,
             "specialWorkspaceIcons": [
                 {
+                    "flags": "",
                     "icon": "counter_1",
-                    "name": "s1"
+                    "name": "s1",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_2",
-                    "name": "s2"
+                    "name": "s2",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_3",
-                    "name": "s3"
+                    "name": "s3",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_4",
-                    "name": "s4"
+                    "name": "s4",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_5",
-                    "name": "s5"
+                    "name": "s5",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_6",
-                    "name": "s6"
+                    "name": "s6",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_7",
-                    "name": "s7"
+                    "name": "s7",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_8",
-                    "name": "s8"
+                    "name": "s8",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_9",
-                    "name": "s9"
+                    "name": "s9",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "counter_0",
-                    "name": "s10"
+                    "name": "s10",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "star",
-                    "name": "special"
+                    "name": "special",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "forum",
-                    "name": "communication"
+                    "name": "communication",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "music_cast",
-                    "name": "music"
+                    "name": "music",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "checklist",
-                    "name": "todo"
+                    "name": "todo",
+                    "regex": ""
                 },
                 {
+                    "flags": "",
                     "icon": "monitor_heart",
-                    "name": "sysmon"
+                    "name": "sysmon",
+                    "regex": ""
                 }
             ]
         }
@@ -215,9 +246,9 @@
         "openExpanded": true
     },
     "services": {
+        "clockFormat": "TwentyFourHour",
         "lyricsBackend": "Auto",
-        "weatherUnits": "Celsius",
-        "clockFormat": "TwentyFourHour"
+        "weatherUnits": "Celsius"
     },
     "utilities": {
         "enabled": true,
