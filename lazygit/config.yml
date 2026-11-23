@@ -1,7 +1,7 @@
 git:
-  pagers:
+  diffRenderers:
     - colorArg: never
-      pager: ydiff -p cat -s --wrap --theme light --width={{columnWidth}}
+      command: ydiff -p cat -s --wrap --theme light --width={{columnWidth}}
 gui:
   theme:
     lightTheme: true
