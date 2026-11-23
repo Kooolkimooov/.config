@@ -17,8 +17,31 @@
   programs.home-manager.enable = true;
 
   home.packages = with pkgs; [
+    # search / git / terminal
     ripgrep
     fd
     lazygit
+    gh
+    tmux
+    btop
+    fastfetch
+
+    # media (CLI)
+    ffmpeg
+    feh
+
+    # language runtimes for user tools (not used by ROS/mc_rtc builds)
+    go
+    nodejs_22
+
+    # clang-format 22 only, under both names. Not clangd/clang-tidy,
+    # which would change your editor's C++ setup.
+    (runCommand "clang-format-22" { } ''
+      mkdir -p $out/bin
+      ln -s ${llvmPackages_22.clang-unwrapped}/bin/clang-format $out/bin/clang-format
+      ln -s ${llvmPackages_22.clang-unwrapped}/bin/clang-format $out/bin/clang-format-22
+    '')
+
+    # texliveFull  # about 5 GB. Uncomment to get the same TeX on both OSes instead of apt's texlive-full.
   ];
 }
