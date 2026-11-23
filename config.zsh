@@ -3,6 +3,11 @@ if [[ "$__OMZ_RECURSION_GUARD" == "1" ]]; then
   return
 fi
 
+# Home Manager session variables (menus/icons for Nix apps, cursors, terminfo, locales)
+if [[ -r ~/.nix-profile/etc/profile.d/hm-session-vars.sh ]]; then
+  . ~/.nix-profile/etc/profile.d/hm-session-vars.sh
+fi
+
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"
 
 sccsh(){
