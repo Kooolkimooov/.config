@@ -10,8 +10,18 @@
 
   # Ubuntu (non-NixOS) integration: app menus/icons from Nix, terminfo, zsh completions
   targets.genericLinux.enable = true;
-  # GPU integration comes in step 3. Keep it off so the current desktop is untouched.
-  targets.genericLinux.gpu.enable = false;
+  # NVIDIA libraries for Nix programs, provided at /run/opengl-driver (like on NixOS).
+  # The version MUST match the system driver (nvidia-driver-595-open). After an Ubuntu
+  # driver update: change version + sha256, run `home-manager switch`, then the sudo
+  # command it prints.
+  targets.genericLinux.gpu = {
+    enable = true;
+    nvidia = {
+      enable = true;
+      version = "595.99.02";
+      sha256 = "sha256-6HR3lYv3YwcFSTJL1a1slI66btIQ5EAFs+/4SUD24ew=";
+    };
+  };
 
   # Lets Home Manager install and update its own `home-manager` command
   programs.home-manager.enable = true;
