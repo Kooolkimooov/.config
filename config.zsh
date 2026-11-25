@@ -70,7 +70,6 @@ plugins=(
   ssh
   ubuntu
   timer
-  thefuck
   dirhistory
   command-not-found
   colorize

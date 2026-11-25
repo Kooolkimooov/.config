@@ -87,6 +87,14 @@ in
       ln -s ${llvmPackages_22.clang-unwrapped}/bin/clang-format $out/bin/clang-format-22
     '')
 
+    # Python CLI tools, formerly pipx (pipx venvs don't survive the OS switch)
+    yt-dlp
+    pre-commit
+    python3Packages.jupytext
+    ydiff
+    qmk
+    pay-respects # replaces thefuck (removed from nixpkgs, needs Python < 3.12)
+
     # texliveFull  # about 5 GB. Uncomment to get the same TeX on both OSes instead of apt's texlive-full.
 
     # --- desktop: Hyprland 0.55.4 and its tools, all from nixpkgs 26.05 ---
