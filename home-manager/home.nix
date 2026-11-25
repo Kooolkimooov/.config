@@ -68,6 +68,8 @@ in
     tmux
     btop
     fastfetch
+    restic # backups
+    neovim
 
     # media (CLI)
     ffmpeg
@@ -102,6 +104,8 @@ in
     jq          # used by hyprshot
     libnotify   # notify-send
     scrolloverview
+    adw-gtk3
+    papirus-icon-theme
 
     # --- Caelestia (replaces the old `nix profile` entries) ---
     inputs.caelestia-shell.packages.${system}.default
