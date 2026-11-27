@@ -66,7 +66,7 @@ in
     lazygit
     gh
     tmux
-    btop
+    (btop.override { cudaSupport = true; })
     fastfetch
     restic # backups
     neovim
