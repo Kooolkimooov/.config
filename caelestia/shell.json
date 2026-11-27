@@ -113,7 +113,7 @@
         },
         "workspaces": {
             "activeIndicator": true,
-            "activeTrail": true,
+            "activeTrail": false,
             "occupiedBg": true,
             "perMonitor": true,
             "showWindows": true,
