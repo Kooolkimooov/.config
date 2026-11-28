@@ -65,6 +65,7 @@ end)
 hl.env("XCURSOR_SIZE", "24")
 hl.env("XCURSOR_THEME", "rose-pine-hyprcursor")
 hl.env("XDG_MENU_PREFIX", "arch-")
+hl.env("CAELESTIA_XKB_RULES_PATH", (os.getenv("XDG_CONFIG_HOME") or os.getenv("HOME") .. "/.config") .. "/caelestia/layout-labels.lst")
 
 
 -----------------------
