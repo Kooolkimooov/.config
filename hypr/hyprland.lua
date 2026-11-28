@@ -242,8 +242,8 @@ hl.config({
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#input
 hl.config({
     input = {
-        kb_layout  = "fr",
-        kb_variant = "azerty",
+        kb_layout  = "fr,fr",
+        kb_variant = "azerty,ergol",
         kb_model   = "",
         kb_options = "",
         kb_rules   = "",
@@ -296,6 +296,10 @@ hl.bind(mainMod .. " + I", hl.dsp.exec_cmd("caelestia shell idleInhibitor toggle
 hl.bind(mainModShift .. " + F", hl.dsp.window.float())
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen" }))
 hl.bind(mainMod .. " + Space", hl.dsp.global("caelestia:launcher"))
+hl.bind(mainModShift .. " + Space", hl.dsp.exec_cmd("hyprctl switchxkblayout all next"), {
+    description = "Switch keyboard layout",
+    locked = true,
+})
 hl.bind(mainModCtrl .. " + T", hl.dsp.window.pin())
 
 -- hl.bind(mainMod .. " + P", hl.dsp.window.pseudo()) -- dwindle
