@@ -445,24 +445,26 @@ hl.workspace_rule({ workspace = "10", monitor = "DP-1", default = true })
 -- decoration.dim_special (default 0.2) controls how much that one is dimmed.
 hl.workspace_rule({ workspace = "special:special", gaps_out = 60 })
 
+-- Commands to run when one of these workspaces is created empty (replaces the
+-- deprecated on_created_empty workspace rule field).
+local on_created_empty = {}
+
 -- Same inset for every per-workspace scratchpad, and a terminal waiting in each
 -- one the first time it is opened
 for i = 1, 10 do
-    hl.workspace_rule({
-        workspace        = "special:s" .. i,
-        gaps_out         = 60,
-        on_created_empty = terminal,
-    })
+    hl.workspace_rule({ workspace = "special:s" .. i, gaps_out = 60 })
+    on_created_empty["special:s" .. i] = terminal
 end
 
--- Music scratchpad. on_created_empty runs the first time it is opened, so the
--- players start on demand rather than at login; the window rules keep them
--- there if they are launched some other way.
-hl.workspace_rule({
-    workspace        = "special:music",
-    gaps_out         = 60,
-    on_created_empty = "sh -c 'spotify-launcher & exec kitty --class cliamp -e cliamp'",
-})
+-- Music scratchpad. The players start the first time it is opened rather than
+-- at login; the window rules keep them there if they are launched some other way.
+hl.workspace_rule({ workspace = "special:music", gaps_out = 60 })
+on_created_empty["special:music"] = "sh -c 'spotify-launcher'"
+
+hl.on("workspace.created", function(ws)
+    local cmd = ws and ws.is_empty and on_created_empty[ws.name]
+    if cmd then hl.exec_cmd(cmd) end
+end)
 hl.window_rule({
     name  = "music-spotify",
     match = { class = "^([Ss]potify|spotify-launcher)$" },
